@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="quiz")
 public class Quiz {
@@ -22,6 +24,7 @@ public class Quiz {
 	private String name;
 
 	@OneToMany(mappedBy="quiz")
+	@JsonIgnore
 	private Set<Question> questions;
 	
 	// gets and sets

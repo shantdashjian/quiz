@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="question")
@@ -23,11 +27,13 @@ public class Question {
 	@Column(name="question_text")
 	private String questionText;
 
-	@OneToMany(mappedBy="question")
+	@OneToMany(mappedBy="question", fetch= FetchType.EAGER)
+	@JsonManagedReference
 	private Set<Answer> answers;
 
 	@ManyToOne
 	@JoinColumn(name="quiz_id")
+	@JsonIgnore
 	private Quiz quiz;
 	
 	// gets and sets
