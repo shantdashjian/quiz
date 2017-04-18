@@ -87,5 +87,10 @@ public class QuizController {
 		}
 	}
 	
-//	public  boolean destroyQuestions(int id, int questid);
+//	DELETE api/quiz/{id}/questions/{q_id}
+	@RequestMapping(path="quizzes/{quizId}/questions/{questionId}", method=RequestMethod.DELETE)
+	public  boolean destroyQuestions(@PathVariable int quizId, @PathVariable int questionId, HttpServletResponse response) {
+		return quizDAO.destroyQuestion(quizId, questionId);
+	
+	};
 }

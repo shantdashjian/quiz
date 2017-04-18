@@ -14,5 +14,5 @@ public interface QuizDAO {
 	public boolean destroy(int id);
 	public Set<Question> showQuestions(int id);
 	public Question createQuestion(int quizId, Question question);
-//	public boolean destroyQuestion(int id, int questid);
+	public boolean destroyQuestion(int quizId, int questionId);
 }

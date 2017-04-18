@@ -82,4 +82,16 @@ public class QuizDAOImpl implements QuizDAO {
 		return question;
 	}
 
+	@Override
+	public boolean destroyQuestion(int quizId, int questionId) {
+		boolean flag = false;
+		try {			
+			em.remove(em.find(Question.class, questionId));
+			flag = true;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return flag;
+	}
+
 }
