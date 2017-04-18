@@ -29,7 +29,6 @@ public class QuizController {
 	public String ping(){
 		return "pong";
 	}
-	
 //	GET quizzes
 	@RequestMapping(path="quizzes", method=RequestMethod.GET)
 	public List<Quiz> index() {
@@ -69,12 +68,12 @@ public class QuizController {
 	public boolean destroy(@PathVariable int id, HttpServletResponse response){
 		return quizDAO.destroy(id);
 	};
-	// GET quizzes/{quizId}/questions
+// 	GET quizzes/{quizId}/questions
 	@RequestMapping(path="quizzes/{quizId}/questions", method=RequestMethod.GET)
 	public Set<Question> showQuestions(@PathVariable int quizId) {
 			return quizDAO.showQuestions(quizId);
 	};
-	// POST quizzes/{quizId}/questions
+// 	POST quizzes/{quizId}/questions
 	@RequestMapping(path="quizzes/{quizId}/questions", method=RequestMethod.POST)
 	public Question createQuestion(@PathVariable int quizId, @RequestBody String jsonQuestion, HttpServletResponse response) {
 		ObjectMapper mapper = new ObjectMapper();
@@ -86,7 +85,6 @@ public class QuizController {
 			return null;
 		}
 	}
-	
 //	DELETE api/quiz/{id}/questions/{q_id}
 	@RequestMapping(path="quizzes/{quizId}/questions/{questionId}", method=RequestMethod.DELETE)
 	public  boolean destroyQuestions(@PathVariable int quizId, @PathVariable int questionId, HttpServletResponse response) {
