@@ -5,7 +5,7 @@
 	  
 	  	 <!-- Add entities here -->
 	  
-	    <!-- <class>entities.Customer</class> -->
+	    <class>entities.Quiz</class>
 	   
 	    	  
 	  	<properties>
