@@ -74,6 +74,18 @@ public class QuizController {
 	public Set<Question> showQuestions(@PathVariable int quizId) {
 			return quizDAO.showQuestions(quizId);
 	};
-//	public Question createQuestions(int id, String questionJson, HttpServletResponse res);
+	// POST quizzes/{quizId}/questions
+	@RequestMapping(path="quizzes/{quizId}/questions", method=RequestMethod.POST)
+	public Question createQuestion(@PathVariable int quizId, @RequestBody String jsonQuestion, HttpServletResponse response) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			Question mappedQuestion= mapper.readValue(jsonQuestion, Question.class);
+			return quizDAO.createQuestion(quizId, mappedQuestion);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 //	public  boolean destroyQuestions(int id, int questid);
 }

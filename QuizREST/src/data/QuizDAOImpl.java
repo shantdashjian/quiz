@@ -73,4 +73,13 @@ public class QuizDAOImpl implements QuizDAO {
 		return questions;
 	}
 
+	@Override
+	public Question createQuestion(int quizId, Question question) {
+		Quiz quiz = em.find(Quiz.class, quizId);
+		question.setQuiz(quiz);
+		em.persist(question);
+		em.flush();
+		return question;
+	}
+
 }

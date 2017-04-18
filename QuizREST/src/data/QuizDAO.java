@@ -13,6 +13,6 @@ public interface QuizDAO {
 	public Quiz update(int id, Quiz quiz);
 	public boolean destroy(int id);
 	public Set<Question> showQuestions(int id);
-//	public Question createQuestion(int id, Question q);
+	public Question createQuestion(int quizId, Question question);
 //	public boolean destroyQuestion(int id, int questid);
 }
