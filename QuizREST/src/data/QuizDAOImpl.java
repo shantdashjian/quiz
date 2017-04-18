@@ -1,12 +1,14 @@
 package data;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import entities.Question;
 import entities.Quiz;
 
 @Transactional
@@ -51,6 +53,24 @@ public class QuizDAOImpl implements QuizDAO {
 			System.out.println(e);
 		}
 		return flag;
+	}
+
+	@Override
+	public Set<Question> showQuestions(int quizId) {
+		Set<Question> questions = null;
+
+		String queryString = "SELECT quiz " 
+				+ "FROM Quiz quiz JOIN FETCH quiz.questions " 
+				+ "WHERE quiz.id = :id";
+		try {
+			Quiz quiz = em.createQuery(queryString, Quiz.class)
+			.setParameter("id", quizId)
+			.getSingleResult();
+			questions = quiz.getQuestions();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return questions;
 	}
 
 }

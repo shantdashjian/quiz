@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import data.QuizDAO;
+import entities.Question;
 import entities.Quiz;
 
 @RestController
@@ -67,7 +69,11 @@ public class QuizController {
 	public boolean destroy(@PathVariable int id, HttpServletResponse response){
 		return quizDAO.destroy(id);
 	};
-//	public Set<Question> showQuestions(int id);
+	// GET quizzes/{quizId}/questions
+	@RequestMapping(path="quizzes/{quizId}/questions", method=RequestMethod.GET)
+	public Set<Question> showQuestions(@PathVariable int quizId) {
+			return quizDAO.showQuestions(quizId);
+	};
 //	public Question createQuestions(int id, String questionJson, HttpServletResponse res);
 //	public  boolean destroyQuestions(int id, int questid);
 }
