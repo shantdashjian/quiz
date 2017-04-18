@@ -1,10 +1,13 @@
 package entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +21,9 @@ public class Quiz {
 	@Column(name="name")
 	private String name;
 
+	@OneToMany(mappedBy="quiz")
+	private Set<Question> questions;
+	
 	// gets and sets
 	public String getName() {
 		return name;
@@ -31,10 +37,21 @@ public class Quiz {
 		return id;
 	}
 
+	
+	public Set<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(Set<Question> questions) {
+		this.questions = questions;
+	}
+
 	@Override
 	public String toString() {
-		return "Quiz [id=" + id + ", name=" + name + "]";
+		return "Quiz [id=" + id + ", name=" + name + ", questions=" + questions + "]";
 	}
+
+	
 	
 	
 }

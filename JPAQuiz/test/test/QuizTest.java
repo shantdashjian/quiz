@@ -3,7 +3,7 @@ package test;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasProperty;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -42,5 +42,12 @@ public class QuizTest {
 	            hasProperty("name", is("German"))           
 	        )
 	      );
+	}
+	
+	@Test
+	public void test_questions_association() {
+		quiz = entityManager.find(Quiz.class, 10);
+		int expectedOutcome = 5;
+		assertEquals(expectedOutcome, quiz.getQuestions().size());
 	}
 }
