@@ -71,9 +71,6 @@ public class Question {
 	public String toString() {
 		return "Question [id=" + id + ", questionText=" + questionText + ", answers=" + answers + ", quiz=" + quiz
 				+ "]";
-	}
-
-	
-	
+	}	
 	
 }
