@@ -20,75 +20,90 @@ import entities.Quiz;
 
 @RestController
 public class QuizController {
-	
+
 	@Autowired
 	public QuizDAO quizDAO;
-	
-//	GET ping
-	@RequestMapping(path="ping", method=RequestMethod.GET)
-	public String ping(){
+
+	// GET ping
+	@RequestMapping(path = "ping", method = RequestMethod.GET)
+	public String ping() {
 		return "pong";
 	}
-//	GET quizzes
-	@RequestMapping(path="quizzes", method=RequestMethod.GET)
+
+	// GET quizzes
+	@RequestMapping(path = "quizzes", method = RequestMethod.GET)
 	public List<Quiz> index() {
 		return quizDAO.index();
 	};
-//	GET quizzes/{id}
-	@RequestMapping(path="quizzes/{id}", method=RequestMethod.GET)
-	public Quiz show(@PathVariable int id){
+
+	// GET quizzes/{id}
+	@RequestMapping(path = "quizzes/{id}", method = RequestMethod.GET)
+	public Quiz show(@PathVariable int id) {
 		return quizDAO.show(id);
 	};
-//	POST quizzes
-	@RequestMapping(path="quizzes", method=RequestMethod.POST)
-	public Quiz create(@RequestBody String jsonQuiz, HttpServletResponse response){
-			ObjectMapper mapper = new ObjectMapper();
-			try {
-				Quiz mappedQuiz = mapper.readValue(jsonQuiz, Quiz.class);
-				return quizDAO.create(mappedQuiz);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}
-		}
-//	PUT quizzes/{id}
-	@RequestMapping(path="quizzes/{id}", method=RequestMethod.PUT)
-	public Quiz update(@PathVariable int id, @RequestBody String jsonQuiz, HttpServletResponse response){
+
+	// POST quizzes
+	@RequestMapping(path = "quizzes", method = RequestMethod.POST)
+	public Quiz create(@RequestBody String jsonQuiz, HttpServletResponse response) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Quiz mappedQuiz = mapper.readValue(jsonQuiz, Quiz.class);
+			response.setStatus(201);
+			return quizDAO.create(mappedQuiz);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	// PUT quizzes/{id}
+	@RequestMapping(path = "quizzes/{id}", method = RequestMethod.PUT)
+	public Quiz update(@PathVariable int id, @RequestBody String jsonQuiz, HttpServletResponse response) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			Quiz mappedQuiz = mapper.readValue(jsonQuiz, Quiz.class);
+			response.setStatus(202);
 			return quizDAO.update(id, mappedQuiz);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	};
-//	DELETE quizzes/{id}
-	@RequestMapping(path="quizzes/{id}", method=RequestMethod.DELETE)
-	public boolean destroy(@PathVariable int id, HttpServletResponse response){
+
+	// DELETE quizzes/{id}
+	@RequestMapping(path = "quizzes/{id}", method = RequestMethod.DELETE)
+	public boolean destroy(@PathVariable int id, HttpServletResponse response) {
+		response.setStatus(202);
 		return quizDAO.destroy(id);
 	};
-// 	GET quizzes/{quizId}/questions
-	@RequestMapping(path="quizzes/{quizId}/questions", method=RequestMethod.GET)
+
+	// GET quizzes/{quizId}/questions
+	@RequestMapping(path = "quizzes/{quizId}/questions", method = RequestMethod.GET)
 	public Set<Question> showQuestions(@PathVariable int quizId) {
-			return quizDAO.showQuestions(quizId);
+		return quizDAO.showQuestions(quizId);
 	};
-// 	POST quizzes/{quizId}/questions
-	@RequestMapping(path="quizzes/{quizId}/questions", method=RequestMethod.POST)
-	public Question createQuestion(@PathVariable int quizId, @RequestBody String jsonQuestion, HttpServletResponse response) {
+
+	// POST quizzes/{quizId}/questions
+	@RequestMapping(path = "quizzes/{quizId}/questions", method = RequestMethod.POST)
+	public Question createQuestion(@PathVariable int quizId, @RequestBody String jsonQuestion,
+			HttpServletResponse response) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			Question mappedQuestion= mapper.readValue(jsonQuestion, Question.class);
+			Question mappedQuestion = mapper.readValue(jsonQuestion, Question.class);
+			response.setStatus(201);
 			return quizDAO.createQuestion(quizId, mappedQuestion);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
-//	DELETE api/quiz/{id}/questions/{q_id}
-	@RequestMapping(path="quizzes/{quizId}/questions/{questionId}", method=RequestMethod.DELETE)
-	public  boolean destroyQuestions(@PathVariable int quizId, @PathVariable int questionId, HttpServletResponse response) {
+
+	// DELETE api/quiz/{id}/questions/{q_id}
+	@RequestMapping(path = "quizzes/{quizId}/questions/{questionId}", method = RequestMethod.DELETE)
+	public boolean destroyQuestions(@PathVariable int quizId, @PathVariable int questionId,
+			HttpServletResponse response) {
+		response.setStatus(202);
 		return quizDAO.destroyQuestion(quizId, questionId);
-	
+
 	};
 }
