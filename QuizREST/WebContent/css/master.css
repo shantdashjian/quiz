@@ -22,11 +22,11 @@ body {
 }
 
 .table>tbody>tr:nth-child(odd)>td, .table>tbody>tr:nth-child(odd)>th {
-    background-color: #9ef;
+    background-color: #AFEEEE;
 }
 
 .table>tbody>tr:nth-child(even)>td, .table>tbody>tr:nth-child(even)>th {
-    background-color: #fe9;
+    background-color: #EEEEAF;
 }
 
 .table tr td:nth-child(2):hover {
@@ -51,7 +51,7 @@ th {
     width: 100% !important;
 }
 
-#details-row1-column2 {
+.questions-row {
     text-align: left;
 }
 

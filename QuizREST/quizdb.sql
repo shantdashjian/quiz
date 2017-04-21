@@ -97,7 +97,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (1,10,'What is the smallest state in the US'),(2,10,'What is the Colorado state bird?'),(3,10,'What is the capital of Colorado?'),(4,10,'What is the Colorado state bird?'),(5,10,'What is the official state dance of Colorado?');
+INSERT INTO `question` VALUES (1,10,'What is the smallest state in the US?'),(2,10,'What is the Colorado state bird?'),(3,10,'What is the capital of Colorado?'),(4,10,'What is the Colorado state bird?'),(5,10,'What is the official state dance of Colorado?');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 

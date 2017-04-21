@@ -41,7 +41,7 @@ public class QuestionTest {
 	    assertThat(question,
 	        allOf(
 	            hasProperty("id", is(1)),	                     
-	            hasProperty("questionText", is("What is the smallest state in the US"))          
+	            hasProperty("questionText", is("What is the smallest state in the US?"))          
 	        )
 	      );
 	}
