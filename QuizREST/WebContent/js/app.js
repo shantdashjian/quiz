@@ -213,42 +213,35 @@ var showQuizDetailsToEdit = function(quiz) {
 
 var showCreateQuizForm = function(){
 	$('#showCreateQuizButton').remove();
-	var $form = $('<form name="createQuizForm" id="createQuizForm">');
-	$form.append('<input id="name" type="text" name="name"  size="12" placeholder="Quiz Name" required><br>');
-	
-	// create button
-	var $createButton = $('<input id="create" type="submit" name="createQuizButton" class="btn btn-primary" value="Create">');
-	$form.append($createButton);
-//	$createButton.click(function(event) {
-	$form.submit(function(event) {
-		event.preventDefault();
-		if ($(createQuizForm.name).val()) {
-			
-			var Quiz = {
-					name: $(createQuizForm.name).val()
-			};
-			$.ajax({
-				type: "POST",
-		        url: 'api/quizzes',
-				dataType: "json",
-				contentType: 'application/json', //setting the request headers content-type
-				data: JSON.stringify(Quiz) //the data being added to the request body
-			}).done(function(Quiz, status) {
-				confirmQuizAdded(Quiz);
-			}).fail(function(xhr, status, error) {
-				$('#content').append('<p>An Error has Occured</p>');
-			});
-		} else {
-			$form.prepend('<p>Please enter quiz name!</p>');
-
-		}
+	$('.container').append('<div id="formRow" class="row"></div>');
+	$('#formRow').append('<div class="col-md-6 col-md-offset-3 bordered form" id="formColumn"></div>');
+	$('#formColumn').load('html/create-quiz-form.html', function(){		
+		var $form = $('#createQuizForm');
+		$form.submit(function(event) {
+			event.preventDefault();
+			if ($(createQuizForm.name).val()) {
+				
+				var Quiz = {
+						name: $(createQuizForm.name).val()
+				};
+				$.ajax({
+					type: "POST",
+					url: 'api/quizzes',
+					dataType: "json",
+					contentType: 'application/json', //setting the request headers content-type
+					data: JSON.stringify(Quiz) //the data being added to the request body
+				}).done(function(Quiz, status) {
+					confirmQuizAdded(Quiz);
+				}).fail(function(xhr, status, error) {
+					$('#content').append('<p>An Error has Occured</p>');
+				});
+			} else {
+				$form.prepend('<p>Please enter quiz name!</p>');
+				
+			}
+		});
+		
 	});
-	
-	
-	$('.container').append($form);
-	$($form).wrap('<div class="col-md-6 col-md-offset-3 bordered form" id="formColumn"></div>');
-	$('#formColumn').wrap('<div class="row"></div>');
-	$('#formColumn').prepend("<h1 class='backgrounded bordered'>Create New Quiz!</h1>");
 }
 
 var confirmQuizAdded = function(Quiz) {
